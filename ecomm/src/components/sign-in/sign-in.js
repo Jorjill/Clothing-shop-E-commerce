@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FormInput from '../form-input/form-input';
 import CustonButton from '../custom-button/custom-button';
+import { signInWithGoogle } from '../../firebase/firebase.utils'
 import './sign-in.scss';
 
 class SignIn extends Component {
@@ -34,7 +35,6 @@ class SignIn extends Component {
                     name="email" type="email" 
                     value={this.state.email} 
                     label="Email"
-                    required
                   />
                   <FormInput 
                     name="password" 
@@ -42,9 +42,11 @@ class SignIn extends Component {
                     value={this.state.password} 
                     handleChange={this.handleChange}
                     label="Password"
-                    required
                   />
-                  <CustonButton type='submit'> Sign in </CustonButton>
+                  <div className='buttons'>
+                    <CustonButton type='submit'> Sign in </CustonButton>
+                    <CustonButton onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustonButton>
+                  </div>
               </form>
             </div>
         )
