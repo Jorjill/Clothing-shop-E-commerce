@@ -2,6 +2,7 @@ import React from 'react';
 import CollectionItem from '../collection-item/collection-item';
 import './collection-preview.scss';
 
+// CollectionPreview lets us see 4 items in each category
 const CollectionPreview = ({ title, items }) => (
     <div className='collection-preview'>
         <h1 className='title'>{title.toUpperCase()}</h1>

@@ -9,6 +9,11 @@ import CheckoutItem from '../../components/checkout-item/checkout-item';
 
 import './checkout.scss';
 
+// mapStateToProps function passes cartItems and 
+// total as argument to CheckoutPage component  which is called when CustomButton is push on cart-dropdown
+// component. values of cartItems and total are selectCartItems and selectCartTotal
+// from cart.selectors. selectCartItems returns cart.cartItems from store and selectCartTotal
+// returns accumulated value of items price.
 const CheckoutPage = ({ cartItems, total }) => (
   <div className='checkout-page'>
     <div className='checkout-header'>
@@ -33,6 +38,7 @@ const CheckoutPage = ({ cartItems, total }) => (
   </div>
 );
 
+// mapStateToProps returns cartItems and total as argument to CheckoutPage component
 const mapStateToProps = createStructuredSelector({
   cartItems: selectCartItems,
   total: selectCartTotal

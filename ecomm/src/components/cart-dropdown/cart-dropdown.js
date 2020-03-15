@@ -8,6 +8,10 @@ import { createStructuredSelector } from 'reselect';
 import { withRouter } from 'react-router-dom';
 import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
+// CartDropdown will take cartItems as argument. It will show list of items if
+// items exist or show Your cart is empty if not. CartItem component is made for this
+// dropdown, it takes cartitem data as argument and returns customized view for dropdown.
+// if CustomButton is clicked, we go to '/checkout' page and toggleCartHidden action if triggered
 const CartDropdown = ({ cartItems, history, dispatch}) => (
     <div className='cart-dropdown'>
         <div className='cart-items'>
@@ -28,6 +32,7 @@ const CartDropdown = ({ cartItems, history, dispatch}) => (
     </div>
 );
 
+// selectCartItems selector returns cart.cartItems
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems
   });

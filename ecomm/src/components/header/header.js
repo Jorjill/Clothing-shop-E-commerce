@@ -10,6 +10,10 @@ import { createStructuredSelector } from 'reselect';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 
+// Header component is above all switch route components so it will be displayed on every page.
+// Header takes hidden as argument, which is toggled when user clicks on cart icon.
+// selectCartHidden selector returns hidden's value. <CartDropdown /> will show when hidden is
+// true and not show when false.
 const Header = ({ currentUser, hidden }) => (
     <div className='header'>
         <Link className='logo-container' to="/">
