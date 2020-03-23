@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import FormInput from '../form-input/form-input';
 import CustonButton from '../custom-button/custom-button';
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils'
 import './sign-in.scss';
+import { googleSignInStart } from '../../redux/user/user.actions';
+import { emailSignInStart } from '../../redux/user/user.actions';
+import { connect } from 'react-redux';
 
 class SignIn extends Component {
   
@@ -16,15 +18,10 @@ class SignIn extends Component {
 
     handleSubmit = async event => {
         event.preventDefault();
-
+        const { emailSignInStart } = this.props;
         const { email, password } = this.state;
 
-        try {
-          await auth.signInWithEmailAndPassword(email,password);
-          this.setState({email:'',password:''});
-        } catch (error){
-          console.log(error);
-        }
+        emailSignInStart(email, password);
     };
 
     handleChange = event => {
@@ -33,6 +30,7 @@ class SignIn extends Component {
     }
 
     render(){
+      const { googleSignInStart } = this.props;
         return(
             <div className='sign-in'>
               <h2>I already have an account</h2>
@@ -54,7 +52,7 @@ class SignIn extends Component {
                   />
                   <div className='buttons'>
                     <CustonButton type='submit'> Sign in </CustonButton>
-                    <CustonButton onClick={signInWithGoogle} isGoogleSignIn>Sign in with Google</CustonButton>
+                    <CustonButton type='button' onClick={googleSignInStart} isGoogleSignIn>Sign in with Google</CustonButton>
                   </div>
               </form>
             </div>
@@ -62,4 +60,9 @@ class SignIn extends Component {
     }
 }
 
-export default SignIn;
+const mapDispatchToProps = dispatch => ({
+  googleSignInStart: () => dispatch(googleSignInStart()),
+  emailSignInStart: (email, password) => dispatch(emailSignInStart({email, password}))
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);

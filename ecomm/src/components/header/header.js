@@ -11,12 +11,13 @@ import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { createStructuredSelector } from 'reselect';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
+import { signOutStart } from '../../redux/user/user.actions';
 
 // Header component is above all switch route components so it will be displayed on every page.
 // Header takes hidden as argument, which is toggled when user clicks on cart icon.
 // selectCartHidden selector returns hidden's value. <CartDropdown /> will show when hidden is
 // true and not show when false.
-const Header = ({ currentUser, hidden }) => (
+const Header = ({ currentUser, hidden, signOutStart }) => (
     <HeaderContainer>
         <LogoContainer to="/">
             <Logo className='logo'/>
@@ -30,7 +31,7 @@ const Header = ({ currentUser, hidden }) => (
             </OptionLink>
             {
                 currentUser ?
-                <OptionLink as='div' onClick={()=>auth.signOut()}>SIGN OUT</OptionLink>
+                <OptionLink as='div' onClick={signOutStart}>SIGN OUT</OptionLink>
                 :
                 <OptionLink className='option' to='/signin'>SIGN IN</OptionLink>
             }
@@ -48,4 +49,8 @@ const mapStateToProps = createStructuredSelector({
     hidden: selectCartHidden
   });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+    signOutStart: () => dispatch(signOutStart())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
