@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch,Route, Redirect } from 'react-router-dom';
 import './App.css';
 import Header from './components/header/header';
@@ -16,24 +16,15 @@ import ShopPage from './pages/shop/shop';
 import { HomePage } from './pages/homepage/homepage';
 
 // App component
-class App extends React.Component {
-
-  unsubscribeFromAuth = null
-
-  componentDidMount(){
-    const { checkUserSession } = this.props;
-    checkUserSession();
-  }
-
-  componentWillUnmount(){
-    this.unsubscribeFromAuth();
-  }
+const App = ({ checkUserSession,currentUser }) => {
+  useEffect(() => {
+    checkUserSession()
+  }, [checkUserSession]);
   
   // if homepage -> render HomePage
   // if /shop (Header) -> render ShopPage 
   // if /checkout (cart-dropdown) -> render CheckoutPage
   // if /signin -> render SignInAndSignUpPage or homepage if currentUser is true
-  render(){
     return (
     <div>
       <Header/>
@@ -45,18 +36,13 @@ class App extends React.Component {
           exact 
           path='/signin' 
           render={()=>
-            this.props.currentUser ? (
-              <Redirect to='/' />
-            ):(
-              <SignInAndSignUpPage/>
-            )
+            currentUser ? (<Redirect to='/' />):(<SignInAndSignUpPage/>)
           }
           />
       </Switch>
     </div>
     );
   }
-}
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
