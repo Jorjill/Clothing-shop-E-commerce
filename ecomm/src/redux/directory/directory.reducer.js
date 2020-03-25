@@ -27,7 +27,7 @@ const INITIAL_STATE = {
       },
       {
         title: 'mens',
-        imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
+        imageUrl: 'https://static.toiimg.com/photo/73188483.cms',
         size: 'large',
         id: 5,
         linkUrl: 'shop/mens'
