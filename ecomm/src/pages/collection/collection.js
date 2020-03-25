@@ -7,6 +7,7 @@ import { selectCollection } from '../../redux/shop/shop.selectors';
 // collection prop has title and items. CollectionPage component renders title and iterates
 // over items depending on which id number of corresponding url has.
 const CollectionPage = ({ collection }) => {
+
     const { title, items } = collection;
     return (
         <div className='collection-page'>

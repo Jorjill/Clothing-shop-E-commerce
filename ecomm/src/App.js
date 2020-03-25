@@ -20,7 +20,7 @@ const App = ({ checkUserSession,currentUser }) => {
   useEffect(() => {
     checkUserSession()
   }, [checkUserSession]);
-  
+
   // if homepage -> render HomePage
   // if /shop (Header) -> render ShopPage 
   // if /checkout (cart-dropdown) -> render CheckoutPage
